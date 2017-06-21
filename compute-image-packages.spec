@@ -4,7 +4,7 @@
 #
 Name     : compute-image-packages
 Version  : 20170609
-Release  : 2
+Release  : 3
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20170609.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20170609.tar.gz
 Source1  : google-accounts-daemon.service
@@ -81,12 +81,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1497660286
+export SOURCE_DATE_EPOCH=1498060830
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1497660286
+export SOURCE_DATE_EPOCH=1498060830
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
@@ -106,6 +106,7 @@ mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s /usr/lib/systemd/system/google-accounts-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
 ln -s /usr/lib/systemd/system/google-clock-skew-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
 ln -s /usr/lib/systemd/system/google-google-ip-forwarding-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
+ln -s /usr/lib/systemd/system/google-startup-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 ## make_install_append end
 
 %files
@@ -116,6 +117,7 @@ ln -s /usr/lib/systemd/system/google-google-ip-forwarding-daemon.service %{build
 /usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
 /usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
 /usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
+/usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 
 %files bin
 %defattr(-,root,root,-)
@@ -133,6 +135,7 @@ ln -s /usr/lib/systemd/system/google-google-ip-forwarding-daemon.service %{build
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
+%exclude /usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 /usr/lib/systemd/system/google-accounts-daemon.service
 /usr/lib/systemd/system/google-clock-skew-daemon.service
 /usr/lib/systemd/system/google-instance-setup.service
