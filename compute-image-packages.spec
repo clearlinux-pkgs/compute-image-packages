@@ -4,7 +4,7 @@
 #
 Name     : compute-image-packages
 Version  : 20170829
-Release  : 7
+Release  : 8
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20170829.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20170829.tar.gz
 Source1  : google-accounts-daemon.service
@@ -18,6 +18,7 @@ Summary  : Google Compute Engine python library
 Group    : Development/Tools
 License  : Apache-2.0 GPL-3.0
 Requires: compute-image-packages-bin
+Requires: compute-image-packages-legacypython
 Requires: compute-image-packages-python
 Requires: compute-image-packages-config
 Requires: compute-image-packages-autostart
@@ -63,9 +64,18 @@ Group: Default
 config components for the compute-image-packages package.
 
 
+%package legacypython
+Summary: legacypython components for the compute-image-packages package.
+Group: Default
+
+%description legacypython
+legacypython components for the compute-image-packages package.
+
+
 %package python
 Summary: python components for the compute-image-packages package.
 Group: Default
+Requires: compute-image-packages-legacypython
 
 %description python
 python components for the compute-image-packages package.
@@ -79,12 +89,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1504120464
+export SOURCE_DATE_EPOCH=1505000236
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1504120464
+export SOURCE_DATE_EPOCH=1505000236
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
@@ -145,7 +155,10 @@ ln -s /usr/lib/systemd/system/google-shutdown-scripts.service %{buildroot}/usr/l
 /usr/lib/systemd/system/google-shutdown-scripts.service
 /usr/lib/systemd/system/google-startup-scripts.service
 
-%files python
+%files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files python
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
