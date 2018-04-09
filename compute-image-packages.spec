@@ -4,7 +4,7 @@
 #
 Name     : compute-image-packages
 Version  : 20170921
-Release  : 13
+Release  : 14
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20170921.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20170921.tar.gz
 Source1  : google-accounts-daemon.service
@@ -18,7 +18,6 @@ Summary  : Google Compute Engine python library
 Group    : Development/Tools
 License  : Apache-2.0 GPL-3.0
 Requires: compute-image-packages-bin
-Requires: compute-image-packages-legacypython
 Requires: compute-image-packages-python3
 Requires: compute-image-packages-config
 Requires: compute-image-packages-autostart
@@ -65,19 +64,9 @@ Group: Default
 config components for the compute-image-packages package.
 
 
-%package legacypython
-Summary: legacypython components for the compute-image-packages package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the compute-image-packages package.
-
-
 %package python
 Summary: python components for the compute-image-packages package.
 Group: Default
-Requires: compute-image-packages-legacypython
 Requires: compute-image-packages-python3
 
 %description python
@@ -101,15 +90,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507471574
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1523287134
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1507471574
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -166,10 +152,6 @@ ln -s /usr/lib/systemd/system/google-shutdown-scripts.service %{buildroot}/usr/l
 /usr/lib/systemd/system/google-network-setup.service
 /usr/lib/systemd/system/google-shutdown-scripts.service
 /usr/lib/systemd/system/google-startup-scripts.service
-
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
 
 %files python
 %defattr(-,root,root,-)
