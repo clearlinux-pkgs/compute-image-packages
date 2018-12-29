@@ -4,7 +4,7 @@
 #
 Name     : compute-image-packages
 Version  : 20181206
-Release  : 24
+Release  : 25
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20181206.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/20181206.tar.gz
 Source1  : google-accounts-daemon.service
