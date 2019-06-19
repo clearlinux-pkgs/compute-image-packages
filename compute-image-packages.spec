@@ -129,7 +129,7 @@ install -m 0644 %{SOURCE7} %{buildroot}/usr/lib/systemd/system/google-startup-sc
 mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s /usr/lib/systemd/system/google-accounts-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
 ln -s /usr/lib/systemd/system/google-clock-skew-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
-ln -s /usr/lib/systemd/system/google-google-ip-forwarding-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
+ln -s /usr/lib/systemd/system/google-ip-forwarding-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
 ln -s /usr/lib/systemd/system/google-startup-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 ln -s /usr/lib/systemd/system/google-shutdown-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-shutdown-scripts.service
 ## install_append end
