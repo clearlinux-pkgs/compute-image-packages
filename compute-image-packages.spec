@@ -4,16 +4,15 @@
 #
 Name     : compute-image-packages
 Version  : 20191210
-Release  : 30
+Release  : 31
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/v20191210/compute-image-packages-20191210.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/v20191210/compute-image-packages-20191210.tar.gz
 Source1  : google-accounts-daemon.service
 Source2  : google-clock-skew-daemon.service
 Source3  : google-instance-setup.service
-Source4  : google-ip-forwarding-daemon.service
-Source5  : google-network-setup.service
-Source6  : google-shutdown-scripts.service
-Source7  : google-startup-scripts.service
+Source4  : google-network-daemon.service
+Source5  : google-shutdown-scripts.service
+Source6  : google-startup-scripts.service
 Summary  : Google Compute Engine python3 library
 Group    : Development/Tools
 License  : Apache-2.0
@@ -95,7 +94,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1577938462
+export SOURCE_DATE_EPOCH=1577940069
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -124,18 +123,15 @@ mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/google-accounts-daemon.service
 install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/google-clock-skew-daemon.service
 install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/systemd/system/google-instance-setup.service
-install -m 0644 %{SOURCE4} %{buildroot}/usr/lib/systemd/system/google-ip-forwarding-daemon.service
-install -m 0644 %{SOURCE5} %{buildroot}/usr/lib/systemd/system/google-network-setup.service
-install -m 0644 %{SOURCE6} %{buildroot}/usr/lib/systemd/system/google-shutdown-scripts.service
-install -m 0644 %{SOURCE7} %{buildroot}/usr/lib/systemd/system/google-startup-scripts.service
+install -m 0644 %{SOURCE4} %{buildroot}/usr/lib/systemd/system/google-network-daemon.service
+install -m 0644 %{SOURCE5} %{buildroot}/usr/lib/systemd/system/google-shutdown-scripts.service
+install -m 0644 %{SOURCE6} %{buildroot}/usr/lib/systemd/system/google-startup-scripts.service
 ## install_append content
 mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
-ln -s /usr/lib/systemd/system/google-accounts-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
-ln -s /usr/lib/systemd/system/google-clock-skew-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
-ln -s /usr/lib/systemd/system/google-google-ip-forwarding-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
-ln -s /usr/lib/systemd/system/google-startup-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
-ln -s /usr/lib/systemd/system/google-shutdown-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-shutdown-scripts.service
-
+ln -s ../google-accounts-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
+ln -s ../google-clock-skew-daemon.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
+ln -s ../google-shutdown-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-shutdown-scripts.service
+ln -s ../google-startup-scripts.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 ## install_append end
 
 %files
@@ -145,7 +141,6 @@ ln -s /usr/lib/systemd/system/google-shutdown-scripts.service %{buildroot}/usr/l
 %defattr(-,root,root,-)
 /usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
 /usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
-/usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
 /usr/lib/systemd/system/multi-user.target.wants/google-shutdown-scripts.service
 /usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 
@@ -174,13 +169,11 @@ ln -s /usr/lib/systemd/system/google-shutdown-scripts.service %{buildroot}/usr/l
 %defattr(-,root,root,-)
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-accounts-daemon.service
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-clock-skew-daemon.service
-%exclude /usr/lib/systemd/system/multi-user.target.wants/google-ip-forwarding-daemon.service
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-shutdown-scripts.service
 %exclude /usr/lib/systemd/system/multi-user.target.wants/google-startup-scripts.service
 /usr/lib/systemd/system/google-accounts-daemon.service
 /usr/lib/systemd/system/google-clock-skew-daemon.service
 /usr/lib/systemd/system/google-instance-setup.service
-/usr/lib/systemd/system/google-ip-forwarding-daemon.service
-/usr/lib/systemd/system/google-network-setup.service
+/usr/lib/systemd/system/google-network-daemon.service
 /usr/lib/systemd/system/google-shutdown-scripts.service
 /usr/lib/systemd/system/google-startup-scripts.service
