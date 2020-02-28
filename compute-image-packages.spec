@@ -4,7 +4,7 @@
 #
 Name     : compute-image-packages
 Version  : 20191210
-Release  : 32
+Release  : 33
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/v20191210/compute-image-packages-20191210.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/v20191210/compute-image-packages-20191210.tar.gz
 Source1  : google-accounts-daemon.service
@@ -94,7 +94,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1577940069
+export SOURCE_DATE_EPOCH=1582912369
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
