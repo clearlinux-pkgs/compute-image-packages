@@ -4,7 +4,7 @@
 #
 Name     : compute-image-packages
 Version  : 20191210
-Release  : 48
+Release  : 49
 URL      : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/v20191210/compute-image-packages-20191210.tar.gz
 Source0  : https://github.com/GoogleCloudPlatform/compute-image-packages/archive/v20191210/compute-image-packages-20191210.tar.gz
 Source1  : google-accounts-daemon.service
@@ -22,13 +22,10 @@ Requires: compute-image-packages-license = %{version}-%{release}
 Requires: compute-image-packages-python = %{version}-%{release}
 Requires: compute-image-packages-python3 = %{version}-%{release}
 Requires: compute-image-packages-services = %{version}-%{release}
-Requires: boto
-Requires: distro
-Requires: setuptools
-BuildRequires : boto
 BuildRequires : buildreq-distutils3
-BuildRequires : distro
-BuildRequires : setuptools
+BuildRequires : pypi(boto)
+BuildRequires : pypi(distro)
+BuildRequires : pypi(setuptools)
 
 %description
 Google Compute Engine python library for Python 3.x.
@@ -72,6 +69,9 @@ python components for the compute-image-packages package.
 Summary: python3 components for the compute-image-packages package.
 Group: Default
 Requires: python3-core
+Requires: pypi(boto)
+Requires: pypi(distro)
+Requires: pypi(setuptools)
 
 %description python3
 python3 components for the compute-image-packages package.
@@ -94,7 +94,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635714329
+export SOURCE_DATE_EPOCH=1641549273
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
